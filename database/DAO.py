@@ -35,7 +35,7 @@ class DAO():
                     from go_retailers gr 
                     where gr.Country = %s"""
 
-        cursor.execute(query, (country, ))
+        cursor.execute(query, (country,))
 
         result = []
         for row in cursor:
@@ -64,7 +64,6 @@ class DAO():
             r2 = retailerMap[row["r2"]]
             peso = row["n"]
             result.append(Connessione(r1, r2, peso))
-
 
         cursor.close()
         cnx.close()

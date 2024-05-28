@@ -20,7 +20,9 @@ class Controller:
         self._view.update_page()
 
     def handle_graph(self, e):
+        self._view.btn_graph.disabled=True
         self._view.txt_result.controls.clear()
+        self._view.update_page()
         country = self._view.ddcountry.value
         if country is None:
             self._view.create_alert('Inserire la Nazione')
@@ -30,10 +32,12 @@ class Controller:
             self._view.create_alert("Inserire l'anno")
             return
 
-        self._model.CreaGrafo(country, int(year))
+        self._model.getRetailers(country)
+        self._model.CreaGrafo(int(year))
 
         self._view.txt_result.controls.append(ft.Text(f"Grafo con {len(self._model.grafo.nodes)} nodi "
                                                       f"e {len(self._model.grafo.edges)} spigoli"))
+        self._view.btn_graph.disabled = False
         self._view.btn_path.disabled = False
         self._view.update_page()
 
